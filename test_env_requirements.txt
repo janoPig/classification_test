@@ -1,0 +1,20 @@
+# TODO: fixed versions
+
+# required for installing rils-rols from pypi
+pybind11
+pandas==1.4.0 # DIGEN benchmark use DataFrame.append
+# QLatticeRegressor
+feyn
+# DIGEN benchmark
+# Generative and reproducible benchmarks for comprehensive evaluation of machine learning classifiers
+# https://arxiv.org/pdf/2107.06475.pdf https://github.com/EpistasisLab/digen
+digen
+# Penn Machine Learning Benchmarks
+# PMLB v1.0: An open source dataset collection for benchmarking machine learning methods
+# https://arxiv.org/pdf/2012.00058.pdf https://github.com/EpistasisLab/pmlb
+pmlb
+
+numpy
+scikit-learn
+matplotlib
+seaborn
