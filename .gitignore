@@ -1,2 +1,5 @@
 test_env/
 code/__pycache__/
+code/catboost_info/
+instances/pmlb/
+catboost_info/
