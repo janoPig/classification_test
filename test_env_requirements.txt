@@ -14,6 +14,8 @@ digen
 # https://arxiv.org/pdf/2012.00058.pdf https://github.com/EpistasisLab/pmlb
 pmlb
 
+ipykernel
+catboost
 numpy
 scikit-learn
 matplotlib
