@@ -17,6 +17,7 @@ pmlb
 ipykernel
 catboost
 numpy
+sympy
 scikit-learn
 matplotlib
 seaborn
