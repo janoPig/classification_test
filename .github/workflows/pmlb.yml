@@ -25,9 +25,10 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
                 echo "Install enviroment"
-                pwd
                 cd classification_test
-                git clone --depth 1 --branch main https://github.com/janoPig/classification_test.git
+                git clone --depth 1 --branch main https://github.com/janoPig/classification_test.git temp_directory
+                mv temp_directory/* classification_test
+                rm -rf temp_directory
                 cd classification_test
                 ./install_requirements.sh
                 ./install_methods.sh
