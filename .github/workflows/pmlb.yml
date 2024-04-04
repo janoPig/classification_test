@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cache enviroment
-        uses: actions/cache@v3
+        uses: actions/cache@v2
         with:
           path:  /home/runner/work/classification_test/classification_test/test_env
           key: ${{ runner.os }}-env
@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cache enviroment
-        uses: actions/cache@v3
+        uses: actions/cache@v2
         with:
           path:  /home/runner/work/classification_test/classification_test/test_env
           key: ${{ runner.os }}-env
