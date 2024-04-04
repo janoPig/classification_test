@@ -14,7 +14,7 @@ cd tmp
 git clone -b classification_test --depth 1 --single-branch https://github.com/janoPig/sr_core.git
 cd sr_core/Hroch
 echo build hroch binary..
-clang++-18 *.cpp -o hroch.bin -DNDEBUG -fveclib=libmvec -std=c++20 -O3 -mavx2 -Wall -Wextra -fno-math-errno -fno-signed-zeros -funsafe-math-optimizations -ftree-vectorize -fno-exceptions -shared -fPIC
+clang++-18 *.cpp -o hroch.bin -DNDEBUG -fveclib=libmvec -std=c++20 -O3 -march=native -Wall -Wextra -fno-math-errno -fno-signed-zeros -funsafe-math-optimizations -ftree-vectorize -fno-exceptions -shared -fPIC
 echo done!
 
 cd ../..
