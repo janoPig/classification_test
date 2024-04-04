@@ -2,7 +2,7 @@
 
 This repository contains the code for the testing symbolic classificators from HROCH and RILS-ROLS packages.
 
-TODO: Sys req. Ubuntu 22.04, AVX2 capable CPU
+TODO: Sys req. Ubuntu 22.04
 
 ## Requirements
 

@@ -1,0 +1,68 @@
+name: Test symbolic classification on PMLB datataset
+
+on:
+  workflow_dispatch:
+
+env: 
+  CACHE_NUMBER: 0
+defaults:
+  run:
+    shell: bash
+    working-directory: /home/runner/work/
+  
+jobs:
+  cache_env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache enviroment
+        uses: actions/cache@v3
+        with:
+          path:  /home/runner/work/classification_test/classification_test/test_env
+          key: ${{ runner.os }}-env
+        id: cache
+        
+      - name: Install enviroment
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+                echo "Install enviroment"
+                pwd
+                cd classification_test
+                git clone --depth 1 --branch main https://github.com/janoPig/classification_test.git
+                cd classification_test
+                ./install_requirements.sh
+                ./install_methods.sh
+
+  pmlb_test:
+    needs: cache_env
+    strategy:
+      matrix:
+        dataset: [0]
+    env:
+      DATASET:  ${{ matrix.dataset }}
+      
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache enviroment
+        uses: actions/cache@v3
+        with:
+          path:  /home/runner/work/classification_test/classification_test/test_env
+          key: ${{ runner.os }}-env
+        id: cache
+
+      - name: PMLB experiment
+        run: |
+                echo "PMLB experiment"$DATASET 
+                mkdir -p output
+
+                # activate enviroment
+                source /home/runner/work/classification_test/classification_test/test_env/bin/activate
+
+                # run experiment...
+
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: pmlb_experiment
+          path: |
+            /home/runner/work/output
+  
