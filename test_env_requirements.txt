@@ -21,3 +21,4 @@ sympy
 scikit-learn
 matplotlib
 seaborn
+optuna
