@@ -37,7 +37,7 @@ if __name__ == '__main__':
         print(f'invalid dataset name: {dataset_name}')
         sys.exit(1)
 
-    if method != 'all' or not method in METHODS:
+    if method != 'all' and not method in METHODS:
         print(f'invalid method: {method}')
         sys.exit(1)
     
