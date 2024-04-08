@@ -41,7 +41,7 @@ if __name__ == '__main__':
         print(f'invalid method: {method}')
         sys.exit(1)
     
-    num_cpus = multiprocessing.cpu_count() - 1
+    num_cpus = multiprocessing.cpu_count()
 
     print(os.getcwd())
     print(f'Avaliable cpu count: {os.cpu_count()}')
