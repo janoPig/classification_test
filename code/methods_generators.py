@@ -136,7 +136,7 @@ def rf_generator(trial : Trial, random_state):
         'n_estimators': trial.suggest_int('n_estimators', 10, 100),
         'criterion': trial.suggest_categorical(name='criterion', choices=['gini', 'entropy']),
         'max_depth': trial.suggest_int('max_depth', 1, 10),
-        'max_features': trial.suggest_categorical('max_features', [None, 'auto', 'log2']),
+        'max_features': trial.suggest_categorical('max_features', [None, 'sqrt', 'log2']),
         'bootstrap': True,
         'min_samples_split': trial.suggest_int('min_samples_split', 2, 20),
         'min_samples_leaf': trial.suggest_int('min_samples_leaf', 1, 20),
