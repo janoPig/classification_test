@@ -1,10 +1,38 @@
 name: Test symbolic classification on PMLB datataset
 
-on:
-  workflow_dispatch:
-
 env: 
   CACHE_NUMBER: 0
+
+on:
+  workflow_dispatch:
+    inputs:
+      datasets:
+        description: "List of Datasets"
+        type: choice
+        default: all
+        options:
+          - all
+          - adult
+          - agaricus_lepiota
+      method:
+        description: "Tested classification method"
+        type: choice
+        default: "all"
+        options:
+          - all
+          - RILS-ROLS
+          - HROCH
+          - CatBoost
+          - GradientBoosting
+          - LGBM
+          - XGB
+          - DecisionTree
+          - LogisticRegression
+          - KNeighbors
+          - RandomForest
+          - SVC
+
+
 defaults:
   run:
     shell: bash
@@ -15,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cache enviroment
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path:  /home/runner/work/classification_test/classification_test/test_env
           key: ${{ runner.os }}-env
@@ -36,29 +64,41 @@ jobs:
   pmlb_test:
     needs: cache_env
     strategy:
-      matrix:
-        dataset: [0]
+      dataset:
+          - adult
+          - agaricus_lepiota
     env:
-      DATASET:  ${{ matrix.dataset }}
+      DATASET: ${{ matrix.dataset }}
+      METHOD: ${{ github.event.inputs.method }}
+      NO_SKIP: ${{ github.event.inputs.datasets == 'all' || github.event.inputs.datasets == matrix.dataset }}
       
     runs-on: ubuntu-latest
     steps:
       - name: Cache enviroment
-        uses: actions/cache@v2
+        if: env.NO_SKIP == 'true'
+        uses: actions/cache@v3
         with:
           path:  /home/runner/work/classification_test/classification_test/test_env
           key: ${{ runner.os }}-env
         id: cache
 
       - name: PMLB experiment
+        if: env.NO_SKIP == 'true'
         run: |
-                echo "PMLB experiment"$DATASET 
+                echo "PMLB experiment"$DATASET
+                lscpu
                 mkdir -p output
+                cd classification_test
 
+                git clone --depth 1 --branch optuna https://github.com/janoPig/classification_test.git temp_directory
+                mkdir -p classification_test
+                mv temp_directory/* classification_test
                 # activate enviroment
-                source /home/runner/work/classification_test/classification_test/test_env/bin/activate
+                source ./classification_test/test_env/bin/activate
 
                 # run experiment...
+                cd classification_test
+                python3 ./code/run_pmlb_test.py --dataset_name $DATASET --method $METHOD
 
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
