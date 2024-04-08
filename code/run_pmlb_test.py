@@ -32,7 +32,7 @@ def parse_arguments():
     return args.dataset_name, args.method
 
 if __name__ == '__main__':
-    dataset_name, methos = parse_arguments()
+    dataset_name, method = parse_arguments()
     if not dataset_name in DATASETS:
         print(f'invalid dataset name: {dataset_name}')
         sys.exit(1)
