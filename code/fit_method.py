@@ -60,7 +60,7 @@ def objective(trial, method_generator, X, y, random_state):
     clf = method_generator(trial, random_state)
 
     kf = KFold(n_splits=5, shuffle=True, random_state=random_state)
-    log_loss_scorer = make_scorer(log_loss, needs_proba=True, greater_is_better=False)
+    log_loss_scorer = make_scorer(log_loss, response_method="predict_proba", greater_is_better=False)
     scores = -cross_val_score(clf, X, y, scoring=log_loss_scorer, cv=kf)
     
     return np.max([np.mean(scores), np.median([scores])])
