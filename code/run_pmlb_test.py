@@ -19,10 +19,6 @@ METHODS = [
     'SVC',
 ]
 
-METHODS = [
-    'DecisionTree',
-]
-
 def run_script(p):
     arguments = ' '.join([f'{key} {value}' for key, value in zip(parameters.keys(), p)])
     command = f'python3 ./code/fit_method.py {arguments}'
@@ -31,13 +27,18 @@ def run_script(p):
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Fit classification methods on')
     parser.add_argument('--dataset_name', type=str, help='Name of pmlb dataset')
+    parser.add_argument('--method', type=str, help='Tested method or all')
     args = parser.parse_args()
-    return args.dataset_name
+    return args.dataset_name, args.method
 
 if __name__ == '__main__':
-    dataset_name = parse_arguments()
+    dataset_name, methos = parse_arguments()
     if not dataset_name in DATASETS:
         print(f'invalid dataset name: {dataset_name}')
+        sys.exit(1)
+
+    if method != 'all' or not method in METHODS:
+        print(f'invalid method: {method}')
         sys.exit(1)
     
     num_cpus = multiprocessing.cpu_count() - 1
@@ -47,8 +48,8 @@ if __name__ == '__main__':
 
     parameters = {
         '--dataset_name': [dataset_name],
-        '--method': METHODS,
-        '--random_seed': [0, 1, 2, 3, 4],
+        '--method': METHODS if method == 'all' else [method],
+        '--random_seed': [0, 1, 2, 3, 4], # index to SEEDS in git method.py
     }
     parameter_combinations = list(itertools.product(*parameters.values()))
 
