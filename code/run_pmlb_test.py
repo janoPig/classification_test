@@ -23,14 +23,6 @@ METHODS = [
     'DecisionTree',
 ]
 
-parameters = {
-    '--dataset_name': DATASETS,
-    '--method': METHODS,
-    '--random_seed': [0, 1, 2, 3, 4],
-}
-
-parameter_combinations = list(itertools.product(*parameters.values()))
-
 def run_script(p):
     arguments = ' '.join([f'{key} {value}' for key, value in zip(parameters.keys(), p)])
     command = f'python3 ./code/fit_method.py {arguments}'
@@ -52,6 +44,14 @@ if __name__ == '__main__':
 
     print(os.getcwd())
     print(f'Avaliable cpu count: {os.cpu_count()}')
+
+    parameters = {
+        '--dataset_name': [dataset_name],
+        '--method': METHODS,
+        '--random_seed': [0, 1, 2, 3, 4],
+    }
+    parameter_combinations = list(itertools.product(*parameters.values()))
+
     with multiprocessing.Pool(processes=num_cpus) as pool:
         pool.map(run_script, parameter_combinations)
 
