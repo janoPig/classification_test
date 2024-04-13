@@ -98,8 +98,8 @@ def dt_generator(trial : Trial):
 
 def lr_generator(trial : Trial):
     params = {}
-    params['solver'] = trial.suggest_categorical(name='solver',
-                                                 choices=['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga'])
+    #params['solver'] = trial.suggest_categorical(name='solver',choices=['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga'])
+    params['solver'] = 'lbfgs'
     params['dual'] = False
     params['penalty'] = 'l2'
     params['C'] = trial.suggest_loguniform('C', 0.1, 10)
