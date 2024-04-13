@@ -102,7 +102,7 @@ def lr_generator(trial : Trial):
                                                  choices=['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga'])
     params['dual'] = False
     params['penalty'] = 'l2'
-    params['C'] = trial.suggest_loguniform('C', 1e-4, 1e4)
+    params['C'] = trial.suggest_loguniform('C', 0.1, 10)
     params['l1_ratio'] = None
     if params['solver'] == 'liblinear':
         params['penalty'] = trial.suggest_categorical(name='penalty', choices=['l1', 'l2'])
