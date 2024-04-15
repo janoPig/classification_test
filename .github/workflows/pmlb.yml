@@ -55,7 +55,7 @@ on:
           - LogisticRegression
           - KNeighbors
           - RandomForest
-          - SVC
+          # - SVC
 
 defaults:
   run:

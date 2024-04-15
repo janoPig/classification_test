@@ -41,7 +41,7 @@ def cb_generator(trial : Trial):
 
 def gb_generator(trial : Trial):
     params = {
-        'loss': trial.suggest_categorical(name='loss', choices=['deviance', 'exponential']),
+        'loss': 'log_loss',
         'learning_rate': trial.suggest_loguniform('learning_rate', 1e-2, 1),
         'min_samples_leaf': trial.suggest_int('min_samples_leaf', 1, 200),
         'max_depth': trial.suggest_int('max_depth', 1, 10),

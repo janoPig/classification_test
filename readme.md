@@ -39,6 +39,8 @@ Benchmark is implemented with using github workflow. Each estimator is tested 5 
     - DecisionTree search space use for max_features sqrt choose, not auto, because it is not available in the newer version.
     - LogisticRegression 'C' parameter is reduced to interval (0.1, 10) and only lbfgs solver was used, because some datasets eg. Hill_Valley have unacceptable times for running one trial.
     - Added CatBoostClassifier
+    - GradientBoostingClassifier loss parameter 'log_loss'
+    - Removed SVC because it is very slow for given dataset sizes, therefore optimization with Optuna will end with the first trial.
 - Optuna parameters, random seeds and evaluated metrics are defined in code/pmlb_test_settings.py
     ```python
     TEST_SIZE = 0.2
