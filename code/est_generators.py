@@ -20,17 +20,18 @@ def rils_rols_generator(trial : Trial):
 def hroch_generator(trial : Trial):
     algo_settings = {
         'neighbours_count': trial.suggest_int('neighbours_count', 10, 20),
-        'alpha': trial.suggest_float('alpha', 0.05, 0.25),
+        'alpha': trial.suggest_float('alpha', 0.05, 0.2),
         'beta': trial.suggest_float('beta', 0.25, 0.75),
         'pretest_size': trial.suggest_int('pretest_size', 1, 4),
         'sample_size': trial.suggest_int('sample_size', 10, 50),
         }
     population_settings = {
-        'size': trial.suggest_int('pop_size', 10, 100, log=True),
-        'tournament': trial.suggest_int('tournament', 1, 8),
+        'size': trial.suggest_int('pop_size', 20, 80),
+        'tournament': trial.suggest_int('tournament', 2, 5),
         }
     params = {
-        'iter_limit': trial.suggest_int('iter_limit', 5000, 500000, log=True),
+        'time_limit': 0,
+        'iter_limit': trial.suggest_int('iter_limit', 50000, 1000000),
         'algo_settings': algo_settings,
         'population_settings': population_settings,
     }
