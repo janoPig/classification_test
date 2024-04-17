@@ -59,8 +59,10 @@ Benchmark is implemented with using github workflow. Each estimator is tested 5 
 
 ### Run experiments with github workflows
 
-Run this workflow [pmlb.yml](https://github.com/janoPig/classification_test/actions/workflows/pmlb.yml)
+Run this workflow [pmlb.yml](https://github.com/janoPig/classification_test/actions/workflows/pmlb.yml) for the estimator, download artifact to wf_artifacts dir and run evaluate_pmlb.ipynb 
 
 ## Evaluate results
 
 TODO: implement this
+
+evaluate_pmlb.ipynb 
